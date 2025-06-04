@@ -1,0 +1,152 @@
+{
+  "layer": "top",
+  "position": "top",
+  "reload_style_on_change":true,
+  "height": 40,
+  "spacing": 2,
+  "exclusive": true,
+  "expand-right":true,
+  "gtk-layer-shell": true,
+  "passthrough": false,
+  "fixed-center": true,
+  "modules-left": ["custom/arch","hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["mpris"],
+  "modules-right": [
+   "group/hardware", 
+    "battery",
+    "pulseaudio",
+    "clock",
+    "clock#simpleclock",
+    "tray",
+    "custom/power"
+  ],
+    "custom/spotify": {
+    "format": "  {}",
+    "return-type": "json",
+    "on-click": "playerctl -p spotify play-pause",
+    "on-click-right": "spotifatius toggle-liked",
+    "on-click-middle": "playerctl -p spotify next",
+    "exec": "spotifatius monitor"
+  },
+  "mpris": {
+    "player": "spotify",
+    "dynamic-order": ["artist", "title"],
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "player-icons": {
+      "default": ""
+    },
+    "status-icons": {
+      "paused": ""
+    }
+  },
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "format": "{id}",
+    "all-outputs": true,
+    "disable-scroll": false,
+    "active-only": false
+  },
+  "hyprland/window": {
+    "format": "{title}"
+  },
+    "clock#simpleclock": {
+    "tooltip": false,
+    "format": " {:%H:%M}"
+  },
+  "group/hardware":{
+   "orientation":"inherit",
+   "drawer":{
+     "transitiond duration": 300,
+     "childre-class": "not-hardware",
+     "transition-left-to-right": true
+    },
+    "modules":[
+       "custom/icon",
+       "cpu",
+       "memory",
+       "temperature"
+    ]
+  },
+
+  "clock": {
+    "format": " {:L%a %d %b}",
+    "calendar": {
+      "format": {
+        "days": "<span weight='normal'>{}</span>",
+        "months": "<span color='#cdd6f4'><b>{}</b></span>",
+        "today": "<span color='#f38ba8' weight='700'><u>{}</u></span>",
+        "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+        "weeks": "<span color='#a6e3a1'><b>W{}</b></span>"
+      },
+      "mode": "month",
+      "mode-mon-col": 1,
+      "on-scroll": 1
+    },
+    "tooltip-format": "<span color='#cdd6f4' font='Lexend 16'><tt><small>{calendar}</small></tt></span>"
+  },
+  "custom/icon":{
+    "format":"\ueea7",
+    "tooltip": false 
+  },
+  "custom/arch":{
+    "format":"\udb82\udcc7",
+    "on-click":"wofi",
+    "tooltip": false 
+  },
+  "tray":{
+    "icons":{
+    "discord":"\uf1ff",
+    "steam":"\uf1b6"
+    },
+    "icon-size": 18,
+    "spacing":8 
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": true,
+    "interval": 1
+  },
+  "memory": {
+    "format": " {used:0.1f}Gi"
+  },
+  "temperature":{
+    "interval": 20 ,
+    "thermal-zone": 0 ,
+    "tooltip": true,
+    "format-critical":"{icon} {temperatureC}\ue339",
+    "format":"{icon} {temperatureC}\ue339",
+    "format-icons":["\uf2cb", "\uf2c9", "\uf2c7"]
+
+  },
+  "battery": {
+     "interval":1, 
+     "states":{
+        "warning": 45 ,
+	"critical":15 
+     },
+     "format": "{icon} {capacity}%",
+     "format-icons": ["", "", "", "", ""],
+     "format-plugged":"\uf1e6 {capacity}%"
+   },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": " ",
+    "format-icons": {
+      "headphone": "",
+      "default": [" ", " ", " "]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "custom/sep": {
+    "format": "|",
+    "tooltip": false
+  },
+  "custom/power": {
+    "tooltip": false,
+    "on-click": "wlogout -p layer-shell &",
+    "format": "⏻"
+  }
+  
+}
